@@ -61,7 +61,7 @@ Out:
 def addOption(param, outFile, shift):
     if param.default == None:
         outFile.write(shift + 'if args.' + param.name + ' == None:\n')
-        outFile.write(shift + '    print "Please, define --' + param.name + ' parameter. To read help use -h. Program is broken."\n')
+        outFile.write(shift + '    print("Please, define --' + param.name + ' parameter. To read help use -h. Program is broken.")\n')
         outFile.write(shift + '    sys.exit(1)\n')
 
 def main():
@@ -91,19 +91,16 @@ def main():
     outFileName = args.name + '.py'
     outFile = open(outFileName, 'w')
 
-    outFile.write('#!/usr/bin/env python2.7\n\n')
+    outFile.write('#!/usr/bin/env python3.3\n\n')
     outFile.write('import sys\n')
     outFile.write('import argparse\n')
     outFile.write('import subprocess\n')
     outFile.write('# project ' + args.name + '\n')
     outFile.write('# main program file\n')
-    outFile.write('# windows-version, unix-version\n')
-    outFile.write('# Author: Pekov Yury\n')
-    outFile.write("__version__ = '0.0.1'\n\n")
     outFile.write('\n')
     outFile.write('def main():\n')
     outFile.write(shift + '#[options]\n')
-    outFile.write(shift + "parser = argparse.ArgumentParser(add_help=True, version=__version__)\n")
+    outFile.write(shift + "parser = argparse.ArgumentParser()\n")
 
     paramList = [] 
     colonDelimList = args.parameters.split('#')
